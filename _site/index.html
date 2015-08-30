@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Discnt</title>
+    
+    
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Discnt</h1>
+        <p>In-memory, distributed counters</p>
+        <ul>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#api">API</a></li>
+          <li><a href="#other-commands">Other commands</a></li>
+          <li><a href="#client-libraries">Client libraries</a></li>
+          <li><a href="#predictions">Predictions</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <ul class=buttons>
+          <li><a href="https://github.com/ErikDubbelboer/discnt/zipball/1.0.0">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ErikDubbelboer/discnt/tarball/1.0.0">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="http://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1 id="setup">Setup</h1>
+
+<p>To play with Discnt please do the following:</p>
+
+<ol>
+  <li>Compile Discnt, if you can compile Redis, you can compile Discnt, it’s the usual no external deps thing. Just type <code>make</code>. Binaries (<code>discnt-cli</code> and <code>discnt-server</code>) will end up in the <code>src</code> directory.</li>
+  <li>Run a few Discnt nodes in different ports. Create different <code>discnt.conf</code> files following the example <code>discnt.conf</code> in the source distribution.</li>
+  <li>After you have them running, you need to join the cluster. Just select a random node among the nodes you are running, and send the command <code>CLUSTER MEET &lt;ip&gt; &lt;port&gt;</code> for every other node in the cluster.</li>
+</ol>
+
+<p>To run a node, just call <code>./discnt-server</code>.</p>
+
+<p>For example if you are running three Discnt servers in port 7711, 7712, 7713 in order to join the cluster you should use the <code>discnt-cli</code> command line tool and run the following commands:</p>
+
+<pre><code>./discnt-cli -p 7711 cluster meet 127.0.0.1 7712
+./discnt-cli -p 7711 cluster meet 127.0.0.1 7713
+</code></pre>
+
+<p>Your cluster should now be ready. You can try to add a job and fetch it back
+in order to test if everything is working:</p>
+
+<pre><code>./discnt-cli -p 7711
+127.0.0.1:7711&gt; INCRBY test 0.1
+0.1
+127.0.0.1:7711&gt; GET test
+0.1
+</code></pre>
+
+<p>Remember that you can increment counters on different nodes as Discnt
+is multi master.</p>
+
+<h1 id="api">API</h1>
+
+<p>Discnt API is composed of a small set of commands, since the system solves a
+single very specific problem. The main commands are:</p>
+
+<pre><code>INCRBYFLOAT counter_name increment
+</code></pre>
+
+<p>Increments the counter by the specified increment. If the counter does not exist, it is set to 0 before performing the operation. 
+If the command is successful the new incremented value is stored and returned to the caller as a string.
+The precision of the output is fixed at 17 digits after the decimal point regardless of the actual internal precision of the computation.</p>
+
+<pre><code>INCR counter_name
+</code></pre>
+
+<p>Same as <code>INCRBYFLOAT counter_name 1</code>. Provided for Redis compatibility.</p>
+
+<pre><code>INCRBY counter_name increment
+</code></pre>
+
+<p>Same as <code>INCRBYFLOAT counter_name increment</code>. Provided for Redis compatibility.</p>
+
+<pre><code>DECR counter_name
+</code></pre>
+
+<p>Same as <code>INCRBYFLOAT counter_name -1</code>. Provided for Redis compatibility.</p>
+
+<pre><code>DECRBY counter_name decrement
+</code></pre>
+
+<p>Same as <code>INCRBYFLOAT counter_name -decrement</code>. Provided for Redis compatibility.</p>
+
+<pre><code>SET counter_name value
+</code></pre>
+
+<p>Set a counter to the specified value.</p>
+
+<p>A SET also resets the local prediction to 0 and broadcasts it.</p>
+
+<pre><code>GET counter_name
+</code></pre>
+
+<p>Get the value of the counter. If the counter does not exist 0 is retured.
+The precision of the output is fixed at 17 digits after the decimal point regardless of the actual internal value.</p>
+
+<pre><code>PRECISION counter_name [value]
+</code></pre>
+
+<p>Set or get the precision for the local counter. See <a href="#Predictions">Predictions</a>.</p>
+
+<h1 id="other-commands">Other commands</h1>
+
+<p>Note: not everything implemented yet.</p>
+
+<pre><code>INFO
+</code></pre>
+
+<p>Generic server information / stats.</p>
+
+<pre><code>HELLO
+</code></pre>
+
+<p>Returns hello format version, this node ID, all the nodes IDs, IP addresses,
+ports, and priority (lower is better, means node more available).
+Clients should use this as an handshake command when connecting with a
+Discnt node.</p>
+
+<pre><code>KEYS patten
+</code></pre>
+
+<p>Similar to redis KEYS.</p>
+
+<pre><code>CLUSTER MEET ip port
+</code></pre>
+
+<p>CLUSTER MEET is used in order to connect different Discnt nodes into a working cluster.
+See <a href="http://redis.io/commands/cluster-meet">Redis CLUSTER MEET</a></p>
+
+<pre><code>CLUSTER NODES ip port
+</code></pre>
+
+<p>See <a href="http://redis.io/commands/cluster-nodes">Redis CLUSTER NOTES</a></p>
+
+<h1 id="client-libraries">Client libraries</h1>
+
+<p>Discnt uses the same protocol as Redis itself. To adapt Redis clients, or to use it directly, should be pretty easy. However note that Discnt default port is 5262 and not 6379.</p>
+
+<h1 id="predictions">Predictions</h1>
+
+<p>Discnt uses predictions to lower network uses between instances.</p>
+
+<p>Predictions are done on the local shard of a counter. Once per second the prediction is checked against the real value of the local shard. If the prediction is still within the precision of the counter nothing needs to be done.
+If it doesn’t match a new prediction is made and the local value and prediction are send to all nodes. Predictions are done over a period of <code>history-size</code> seconds.
+The default precision can be set using the <code>default-precision</code> config directive. Per counter precision can be get and set using the <code>PRECISION</code> command.</p>
+
+<h1 id="faq">FAQ</h1>
+
+<h2 id="is-discnt-part-of-redis">Is Discnt part of Redis?</h2>
+
+<p>No, it is a standalone project, however a big part of the Redis networking source code, nodes message bus, libraries, and the client protocol, were reused in this new project.</p>
+
+<p>However while it is a separated project, conceptually Discnt is related to Redis, since it tries to solve a Redis use case in a vertical, ad-hoc way.</p>
+
+<h2 id="who-created-discnt">Who created Discnt?</h2>
+
+<p>Discnt is a side project of Erik Dubbelboer.</p>
+
+<h2 id="what-does-discnt-means">What does Discnt means?</h2>
+
+<p>DIStributed CouNTers.</p>
+
+
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="http://github.com/ErikDubbelboer">Erik Dubbelboer</a></p>
+        <p><small>Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>
