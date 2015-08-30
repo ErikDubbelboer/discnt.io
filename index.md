@@ -3,6 +3,8 @@ title: Discnt
 layout: default
 ---
 
+Discnt provides in memory distributed eventually consistent counters.
+
 Setup
 ===
 
@@ -72,7 +74,7 @@ The precision of the output is fixed at 17 digits after the decimal point regard
 
     PRECISION counter_name [value]
 
-Set or get the precision for the local counter. See [Predictions](#Predictions).
+Set or get the precision for the local counter. See [Predictions](#predictions).
 
 
 Other commands
