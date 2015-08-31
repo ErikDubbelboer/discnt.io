@@ -28,8 +28,8 @@
           <li><a href="#faq">FAQ</a></li>
         </ul>
         <ul class=buttons>
-          <li><a href="https://github.com/ErikDubbelboer/discnt/zipball/v0.0.1">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/ErikDubbelboer/discnt/tarball/v0.0.1">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ErikDubbelboer/discnt/zipball/v0.0.2">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ErikDubbelboer/discnt/tarball/v0.0.2">Download <strong>TAR Ball</strong></a></li>
           <li><a href="http://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
         </ul>
       </header>
@@ -106,11 +106,11 @@ The precision of the output is fixed at 17 digits after the decimal point regard
 
 <p>A SET also resets the local prediction to 0 and broadcasts it.</p>
 
-<pre><code>GET counter_name
-</code></pre>
-
-<p>Get the value of the counter. If the counter does not exist 0 is retured.
-The precision of the output is fixed at 17 digits after the decimal point regardless of the actual internal value.</p>
+<p>GET counter_name [STATE]
+Get the value of the counter. If the counter does not exist 0 is returned.
+The precision of the output is fixed at 17 digits after the decimal point regardless of the actual internal value.
+If the optional STATE is specified GET returns a multi reply containing the value and either the string CONSISTENT or
+INCONSISTENT depending on the cluster state.</p>
 
 <pre><code>PRECISION counter_name [value]
 </code></pre>
