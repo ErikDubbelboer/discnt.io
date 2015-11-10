@@ -3,13 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>{{ page.title }} - Discnt</title>
-    {% if page.keywords %}
-    <meta name=keywords content="{{ page.keywords }}">
-    {% endif %}
-    {% if page.description %}
-    <meta name=description content="{{ page.description }}">
-    {% endif %}
+    <title>Setup - Discnt</title>
+    
+    
     
     <link rel="stylesheet" href="/stylesheets/styles.css">
     <link rel="stylesheet" href="/stylesheets/pygment_trac.css">
@@ -27,13 +23,7 @@
           <li><a href="/">Index</a></li>
           <li><a href="/setup.html">Setup</a></li>
           <li><a href="/api.html">API</a>
-            {% if page.apimenu %}
-              <ul>
-                {% for item in page.apimenu %}
-                  <li id="{{ item }}"><a href="#{{ item | downcase }}">{{ item }}</a></li>
-                {% endfor %}
-              </ul>
-            {% endif %}
+            
           </li>
           <li><a href="/clients.html">Clients</a></li>
           <li><a href="/faq.html">FAQ</a></li>
@@ -41,11 +31,42 @@
         <ul class=buttons>
           <li><a href="https://github.com/ErikDubbelboer/discnt/zipball/v1.0.2">Download <strong>ZIP File</strong></a></li>
           <li><a href="https://github.com/ErikDubbelboer/discnt/tarball/v1.0.2">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
+          <li><a href="http://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
-        {{ content }}
+        <h1 id="setup">Setup</h1>
+
+<p>To play with Discnt please do the following:</p>
+
+<ol>
+  <li>Compile Discnt, if you can compile Redis, you can compile Discnt, it’s the usual no external deps thing. Just type <code>make</code>. Binaries (<code>discnt-cli</code> and <code>discnt-server</code>) will end up in the <code>src</code> directory.</li>
+  <li>Run a few Discnt nodes in different ports. Create different <code>discnt.conf</code> files following the example <code>discnt.conf</code> in the source distribution.</li>
+  <li>After you have them running, you need to join the cluster. Just select a random node among the nodes you are running, and send the command <code>CLUSTER MEET &lt;ip&gt; &lt;port&gt;</code> for every other node in the cluster.</li>
+</ol>
+
+<p>To run a node, just call <code>./discnt-server</code>.</p>
+
+<p>For example if you are running three Discnt servers in port 7711, 7712, 7713 in order to join the cluster you should use the <code>discnt-cli</code> command line tool and run the following commands:</p>
+
+<pre><code>./discnt-cli -p 7711 cluster meet 127.0.0.1 7712
+./discnt-cli -p 7711 cluster meet 127.0.0.1 7713
+</code></pre>
+
+<p>Your cluster should now be ready. You can try to add a job and fetch it back
+in order to test if everything is working:</p>
+
+<pre><code>./discnt-cli -p 7711
+127.0.0.1:7711&gt; INCRBY test 0.1
+0.1
+127.0.0.1:7711&gt; GET test
+0.1
+</code></pre>
+
+<p>Remember that you can increment counters on different nodes as Discnt
+is multi master.</p>
+
+
       </section>
       <footer>
         <p>This project is maintained by <a href="http://github.com/ErikDubbelboer">Erik Dubbelboer</a></p>

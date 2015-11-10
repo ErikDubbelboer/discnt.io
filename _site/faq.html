@@ -3,13 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>{{ page.title }} - Discnt</title>
-    {% if page.keywords %}
-    <meta name=keywords content="{{ page.keywords }}">
-    {% endif %}
-    {% if page.description %}
-    <meta name=description content="{{ page.description }}">
-    {% endif %}
+    <title>FAQ - Discnt</title>
+    
+    
     
     <link rel="stylesheet" href="/stylesheets/styles.css">
     <link rel="stylesheet" href="/stylesheets/pygment_trac.css">
@@ -27,13 +23,7 @@
           <li><a href="/">Index</a></li>
           <li><a href="/setup.html">Setup</a></li>
           <li><a href="/api.html">API</a>
-            {% if page.apimenu %}
-              <ul>
-                {% for item in page.apimenu %}
-                  <li id="{{ item }}"><a href="#{{ item | downcase }}">{{ item }}</a></li>
-                {% endfor %}
-              </ul>
-            {% endif %}
+            
           </li>
           <li><a href="/clients.html">Clients</a></li>
           <li><a href="/faq.html">FAQ</a></li>
@@ -41,11 +31,27 @@
         <ul class=buttons>
           <li><a href="https://github.com/ErikDubbelboer/discnt/zipball/v1.0.2">Download <strong>ZIP File</strong></a></li>
           <li><a href="https://github.com/ErikDubbelboer/discnt/tarball/v1.0.2">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
+          <li><a href="http://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
-        {{ content }}
+        <h1 id="faq">FAQ</h1>
+
+<h2 id="is-discnt-part-of-redis">Is Discnt part of Redis?</h2>
+
+<p>No, it is a standalone project, however a big part of the Redis networking source code, nodes message bus, libraries, and the client protocol, were reused in this new project.</p>
+
+<p>However while it is a separated project, conceptually Discnt is related to Redis, since it tries to solve a Redis use case in a vertical, ad-hoc way.</p>
+
+<h2 id="who-created-discnt">Who created Discnt?</h2>
+
+<p>Discnt is a side project of Erik Dubbelboer.</p>
+
+<h2 id="what-does-discnt-means">What does Discnt means?</h2>
+
+<p>DIStributed CouNTers.</p>
+
+
       </section>
       <footer>
         <p>This project is maintained by <a href="http://github.com/ErikDubbelboer">Erik Dubbelboer</a></p>

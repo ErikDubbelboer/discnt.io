@@ -3,13 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>{{ page.title }} - Discnt</title>
-    {% if page.keywords %}
-    <meta name=keywords content="{{ page.keywords }}">
-    {% endif %}
-    {% if page.description %}
-    <meta name=description content="{{ page.description }}">
-    {% endif %}
+    <title>Client libraries - Discnt</title>
+    
+    
     
     <link rel="stylesheet" href="/stylesheets/styles.css">
     <link rel="stylesheet" href="/stylesheets/pygment_trac.css">
@@ -27,13 +23,7 @@
           <li><a href="/">Index</a></li>
           <li><a href="/setup.html">Setup</a></li>
           <li><a href="/api.html">API</a>
-            {% if page.apimenu %}
-              <ul>
-                {% for item in page.apimenu %}
-                  <li id="{{ item }}"><a href="#{{ item | downcase }}">{{ item }}</a></li>
-                {% endfor %}
-              </ul>
-            {% endif %}
+            
           </li>
           <li><a href="/clients.html">Clients</a></li>
           <li><a href="/faq.html">FAQ</a></li>
@@ -41,11 +31,17 @@
         <ul class=buttons>
           <li><a href="https://github.com/ErikDubbelboer/discnt/zipball/v1.0.2">Download <strong>ZIP File</strong></a></li>
           <li><a href="https://github.com/ErikDubbelboer/discnt/tarball/v1.0.2">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
+          <li><a href="http://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
-        {{ content }}
+        <h1 id="client-libraries">Client libraries</h1>
+
+<p>Discnt uses the same protocol as Redis itself. To adapt Redis clients, or to use them directly, should be pretty easy. However note that Discnt default port is <code>5262</code> and not 6379.</p>
+
+<p>Discnt comes with the <code>discnt-cli</code> tool which is similar to the <code>redis-cli</code> tool.</p>
+
+
       </section>
       <footer>
         <p>This project is maintained by <a href="http://github.com/ErikDubbelboer">Erik Dubbelboer</a></p>

@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>API - Discnt</title>
+    
+    
+    
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Discnt</h1>
+        <p>Distributed counters</p>
+        <ul>
+          <li><a href="/">Index</a></li>
+          <li><a href="/setup.html">Setup</a></li>
+          <li><a href="/api.html">API</a>
+            
+              <ul>
+                
+                  <li id="INCRBYFLOAT"><a href="#incrbyfloat">INCRBYFLOAT</a></li>
+                
+                  <li id="INCR"><a href="#incr">INCR</a></li>
+                
+                  <li id="INCRBY"><a href="#incrby">INCRBY</a></li>
+                
+                  <li id="DECR"><a href="#decr">DECR</a></li>
+                
+                  <li id="DECRBY"><a href="#decrby">DECRBY</a></li>
+                
+                  <li id="SET"><a href="#set">SET</a></li>
+                
+                  <li id="GET"><a href="#get">GET</a></li>
+                
+                  <li id="MGET"><a href="#mget">MGET</a></li>
+                
+                  <li id="PRECISION"><a href="#precision">PRECISION</a></li>
+                
+                  <li id="SUBSCRIBE"><a href="#subscribe">SUBSCRIBE</a></li>
+                
+                  <li id="ISUBSCRIBE"><a href="#isubscribe">ISUBSCRIBE</a></li>
+                
+                  <li id="UNSUBSCRIBE"><a href="#unsubscribe">UNSUBSCRIBE</a></li>
+                
+                  <li id="INFO"><a href="#info">INFO</a></li>
+                
+                  <li id="HELLO"><a href="#hello">HELLO</a></li>
+                
+                  <li id="KEYS"><a href="#keys">KEYS</a></li>
+                
+                  <li id="CLUSTER"><a href="#cluster">CLUSTER</a></li>
+                
+              </ul>
+            
+          </li>
+          <li><a href="/clients.html">Clients</a></li>
+          <li><a href="/faq.html">FAQ</a></li>
+        </ul>
+        <ul class=buttons>
+          <li><a href="https://github.com/ErikDubbelboer/discnt/zipball/v1.0.2">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ErikDubbelboer/discnt/tarball/v1.0.2">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="http://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1 id="api">API</h1>
+
+<p>Discnt API is composed of a small set of commands, since the system solves a
+single very specific problem. The main commands are:</p>
+
+<hr id="incrbyfloat" />
+
+<h4>INCRBYFLOAT</h4>
+
+<pre><code>INCRBYFLOAT counter increment
+</code></pre>
+
+<p>Increments the counter by the specified increment. If the counter does not exist, it is set to 0 before performing the operation. 
+If the command is successful the new incremented value is stored and returned to the caller as a string.
+The precision of the output is fixed at 17 digits after the decimal point regardless of the actual internal precision of the computation.</p>
+
+<p>This command is compatible with the Redis INCRBYFLOAT command.</p>
+
+<hr id="incr" />
+
+<h4>INCR</h4>
+
+<pre><code>INCR counter
+</code></pre>
+
+<p>Same as <code>INCRBYFLOAT counter 1</code>. Provided for Redis compatibility.</p>
+
+<p>This command is compatible with the Redis INCRBYFLOAT command.</p>
+
+<hr id="incrby" />
+
+<h4>INCRBY</h4>
+
+<pre><code>INCRBY counter increment
+</code></pre>
+
+<p>Same as <code>INCRBYFLOAT counter increment</code>. Provided for Redis compatibility.</p>
+
+<p>This command is compatible with the Redis INCRBY command.</p>
+
+<hr id="decr" />
+
+<h4>DECR</h4>
+
+<pre><code>DECR counter
+</code></pre>
+
+<p>Same as <code>INCRBYFLOAT counter -1</code>. Provided for Redis compatibility.</p>
+
+<p>This command is compatible with the Redis</p>
+
+<hr id="decrby" />
+
+<h4>DECRBY</h4>
+
+<pre><code>DECRBY counter decrement
+</code></pre>
+
+<p>This command is compatible with the Redis DECRBY command.</p>
+
+<p>Same as <code>INCRBYFLOAT counter -decrement</code>. Provided for Redis compatibility.</p>
+
+<hr id="set" />
+
+<h4>SET</h4>
+
+<pre><code>SET counter value
+</code></pre>
+
+<p>Set a counter to the specified value.</p>
+
+<p>A SET also resets the local prediction to 0 and broadcasts it.</p>
+
+<p>This command is compatible with the Redis SET command as long as a numeric value is used.</p>
+
+<hr id="get" />
+
+<h4>GET</h4>
+
+<pre><code>GET counter [STATE]
+</code></pre>
+
+<p>Get the value of the counter. If the counter does not exist 0 is returned.
+The precision of the output is fixed at 17 digits after the decimal point regardless of the actual internal value.
+If the optional STATE is specified GET returns a multi reply containing the value and either the string CONSISTENT or
+INCONSISTENT depending on the cluster state.</p>
+
+<p>This command is compatible with the Redis GET command.</p>
+
+<hr id="mget" />
+
+<h4>MGET</h4>
+
+<pre><code>MGET counter [counter ...]
+</code></pre>
+
+<p>Get the value of one or more counters. If a counter does not exist 0 is returned as its value.</p>
+
+<hr id="precision" />
+
+<h4>PRECISION</h4>
+
+<pre><code>PRECISION counter [value]
+</code></pre>
+
+<p>Set or get the precision for the local counter. See <a href="#predictions">Predictions</a>.</p>
+
+<hr id="subscribe" />
+
+<h4>SUBSCRIBE</h4>
+
+<pre><code>SUBSCRIBE counter [counter ...]
+</code></pre>
+
+<p>Subscribes the client to the specified counters. Updates to the counters are published to the client with a minimum interval of once per second.</p>
+
+<p>Once the client enters the subscribed state it is not supposed to issue any other commands, except for additional SUBSCRIBE, ISUBSCRIBE, and UNSUBSCRIBE commands.</p>
+
+<p>This command is compatible with the Redis SUBSCRIBE command.</p>
+
+<hr id="isubscribe" />
+
+<h4>ISUBSCRIBE</h4>
+
+<pre><code>ISUBSCRIBE interval counter [counter ...]
+</code></pre>
+
+<p>This command is the same as SUBSCRIBE but allows you to specify the minimum interval in seconds.</p>
+
+<hr id="unsubscribe" />
+
+<h4>UNSUBSCRIBE</h4>
+
+<pre><code>UNSUBSCRIBE [channel [channel ...]]
+</code></pre>
+
+<p>Unsubscribes the client from updates to the given counters, or from all of them if none is given.</p>
+
+<p>When no counters are specified, the client is unsubscribed from all the previously subscribed counters. In this case, a message for every unsubscribed counter will be sent to the client.</p>
+
+<p>This command is compatible with the Redis UNSUBSCRIBE command.</p>
+
+<hr id="info" />
+
+<h4>INFO</h4>
+
+<pre><code>INFO
+</code></pre>
+
+<p>Generic server information / stats.</p>
+
+<hr id="hello" />
+
+<h4>HELLO</h4>
+
+<pre><code>HELLO
+</code></pre>
+
+<p>Returns hello format version, this node ID, all the nodes IDs, IP addresses,
+ports, and priority (lower is better, means node more available).
+Clients should use this as an handshake command when connecting with a
+Discnt node.</p>
+
+<hr id="keys" />
+
+<h4>KEYS</h4>
+
+<pre><code>KEYS patten
+</code></pre>
+
+<p>Similar to redis KEYS.</p>
+
+<hr id="cluster" />
+
+<h4>CLUSTER</h4>
+
+<pre><code>CLUSTER MEET ip port
+</code></pre>
+
+<p>CLUSTER MEET is used in order to connect different Discnt nodes into a working cluster.
+See <a href="http://redis.io/commands/cluster-meet">Redis CLUSTER MEET</a></p>
+
+<pre><code>CLUSTER NODES ip port
+</code></pre>
+
+<p>See <a href="http://redis.io/commands/cluster-nodes">Redis CLUSTER NOTES</a></p>
+
+
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="http://github.com/ErikDubbelboer">Erik Dubbelboer</a></p>
+        <p><small>Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7915266-4', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
