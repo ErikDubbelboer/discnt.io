@@ -116,7 +116,7 @@ Get the value of one or more counters. If a counter does not exist 0 is returned
 
     PRECISION counter [value]
 
-Set or get the precision for the local counter. See [Predictions](#predictions).
+Set or get the precision for the local counter. See [Predictions](/#predictions).
 
 
 <hr id="subscribe">

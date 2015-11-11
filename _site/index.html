@@ -17,7 +17,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Discnt</h1>
+        <h1><a href="/">Discnt</a></h1>
         <p>Distributed counters</p>
         <ul>
           <li><a href="/">Index</a></li>
@@ -31,7 +31,7 @@
         <ul class=buttons>
           <li><a href="https://github.com/ErikDubbelboer/discnt/zipball/v1.0.2">Download <strong>ZIP File</strong></a></li>
           <li><a href="https://github.com/ErikDubbelboer/discnt/tarball/v1.0.2">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="http://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
+          <li><a href="https://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
@@ -44,8 +44,8 @@
 <p>Discnt uses predictions to lower network uses between instances.</p>
 
 <p>Predictions are done on the local shard of a counter. Once per second the prediction is checked against the real value of the local shard. If the prediction is still within the precision of the counter nothing needs to be done.
-If it doesn’t match a new prediction is made and the local value and prediction are send to all nodes. Predictions are done over a period of <code>history-size</code> seconds.
-The default precision can be set using the <code>default-precision</code> config directive. Per counter precision can be get and set using the <code>PRECISION</code> command.</p>
+If it doesn’t match a new prediction is made and the local value and prediction are send to all nodes. Predictions are done over a period of <a href="https://github.com/ErikDubbelboer/discnt/blob/fe7e3ead135d747dc5f5efd59067f0af726fcfbc/discnt.conf#L342"><code>history-size</code></a> seconds.
+The default precision can be set using the <a href="https://github.com/ErikDubbelboer/discnt/blob/fe7e3ead135d747dc5f5efd59067f0af726fcfbc/discnt.conf#L339"><code>default-precision</code></a> config directive. Per counter precision can be get and set using the <a href="/api.html#precision"><code>PRECISION</code></a> command.</p>
 
 
       </section>

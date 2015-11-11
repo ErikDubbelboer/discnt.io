@@ -16,9 +16,9 @@ However while it is a separated project, conceptually Discnt is related to Redis
 Who created Discnt?
 ---
 
-Discnt is a side project of Erik Dubbelboer.
+Discnt is a side project of <a href="http://blog.dubbelboer.com/about.html">Erik Dubbelboer</a>.
 
-What does Discnt means?
+What does Discnt mean?
 ---
 
 DIStributed CouNTers.
