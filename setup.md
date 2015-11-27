@@ -1,10 +1,15 @@
 ---
 title: Setup
 layout: default
+setupmenu:
+  - Source
+  - Ubuntu
 ---
 
 {{ page.title }}
 ===
+
+<h2 id="source">Source</h2>
 
 To play with Discnt please do the following:
 
@@ -30,4 +35,25 @@ in order to test if everything is working:
 
 Remember that you can increment counters on different nodes as Discnt
 is multi master.
+
+
+<h2 id="ubuntu">Ubuntu</h2>
+
+First you need to add the key:
+
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x6f2a6e77ada5694c
+
+And then add the sources:
+
+    sudo add-apt-repository ppa:discnt/stable
+
+Or add the following sources manually (change the release to your Ubuntu version):
+
+    deb http://ppa.launchpad.net/discnt/stable/ubuntu precise main
+    deb-src http://ppa.launchpad.net/discnt/stable/ubuntu precise main
+
+After this you can run:
+
+    sudo apt-get update
+    sudo apt-get install discnt
 

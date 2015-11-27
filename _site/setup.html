@@ -21,7 +21,17 @@
         <p>Distributed counters</p>
         <ul>
           <li><a href="/">Index</a></li>
-          <li><a href="/setup.html">Setup</a></li>
+          <li><a href="/setup.html">Setup</a>
+            
+              <ul>
+                
+                  <li><a href="#source">Source</a></li>
+                
+                  <li><a href="#ubuntu">Ubuntu</a></li>
+                
+              </ul>
+            
+          </li>
           <li><a href="/api.html">API</a>
             
           </li>
@@ -29,13 +39,15 @@
           <li><a href="/faq.html">FAQ</a></li>
         </ul>
         <ul class=buttons>
-          <li><a href="https://github.com/ErikDubbelboer/discnt/zipball/v1.0.2">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/ErikDubbelboer/discnt/tarball/v1.0.2">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ErikDubbelboer/discnt/zipball/v1.0.3">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ErikDubbelboer/discnt/tarball/v1.0.3">Download <strong>TAR Ball</strong></a></li>
           <li><a href="https://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
         <h1 id="setup">Setup</h1>
+
+<h2 id="source">Source</h2>
 
 <p>To play with Discnt please do the following:</p>
 
@@ -66,10 +78,35 @@ in order to test if everything is working:</p>
 <p>Remember that you can increment counters on different nodes as Discnt
 is multi master.</p>
 
+<h2 id="ubuntu">Ubuntu</h2>
+
+<p>First you need to add the key:</p>
+
+<pre><code>sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x6f2a6e77ada5694c
+</code></pre>
+
+<p>And then add the sources:</p>
+
+<pre><code>sudo add-apt-repository ppa:discnt/stable
+</code></pre>
+
+<p>Or add the following sources manually (change the release to your Ubuntu version):</p>
+
+<pre><code>deb http://ppa.launchpad.net/discnt/stable/ubuntu precise main
+deb-src http://ppa.launchpad.net/discnt/stable/ubuntu precise main
+</code></pre>
+
+<p>After this you can run:</p>
+
+<pre><code>sudo apt-get update
+sudo apt-get install discnt
+</code></pre>
+
 
       </section>
       <footer>
         <p>This project is maintained by <a href="http://github.com/ErikDubbelboer">Erik Dubbelboer</a></p>
+        <p><small><a href="https://github.com/erikdubbelboer/discnt.io">Source for this site</a></small></p>
         <p><small>Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
