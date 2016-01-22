@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>FAQ - Discnt</title>
+    <title>Security - Discnt</title>
     
     
     
@@ -38,21 +38,19 @@
         </ul>
       </header>
       <section>
-        <h1 id="faq">FAQ</h1>
+        <h1 id="security">Security</h1>
 
-<h2 id="is-discnt-part-of-redis">Is Discnt part of Redis?</h2>
+<p>Discnt is designed to be accessed by trusted clients inside trusted environments. This means that usually it is not a good idea to expose the Discnt instance directly to the internet or, in general, to an environment where untrusted clients can directly access the Discnt TCP port or UNIX socket.</p>
 
-<p>No, it is a standalone project, however a big part of the Redis networking source code, nodes message bus, libraries, and the client protocol, were reused in this new project.</p>
+<p>By default Discnt binds to all interfaces. It is possible to bind Discnt to a single interface by adding a line like the following to the discnt.conf file:</p>
 
-<p>However while it is a separated project, conceptually Discnt is related to Redis, since it tries to solve a Redis use case in a vertical, ad-hoc way.</p>
+<p><code>
+bind 127.0.0.1
+</code></p>
 
-<h2 id="who-created-discnt">Who created Discnt?</h2>
+<p>Failing to protect the Discnt port from the outside can have a big security impact because of the nature of Discnt. For instance, a single <code>DEBUG SEGFAULT</code> command can be used by an external attacker to crash the instance.</p>
 
-<p>Discnt is a side project of <a href="http://blog.dubbelboer.com/about.html">Erik Dubbelboer</a>.</p>
-
-<h2 id="what-does-discnt-mean">What does Discnt mean?</h2>
-
-<p>DIStributed CouNTers.</p>
+<p>For more information see the <a href="http://redis.io/topics/security">Redis page on security</a></p>
 
 
       </section>
