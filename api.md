@@ -186,7 +186,11 @@ Similar to redis KEYS.
 CLUSTER MEET is used in order to connect different Discnt nodes into a working cluster.
 See [Redis CLUSTER MEET](http://redis.io/commands/cluster-meet)
 
-    CLUSTER NODES ip port
+    CLUSTER NODES
 
-See [Redis CLUSTER NOTES](http://redis.io/commands/cluster-nodes)
+See [Redis CLUSTER NODES](http://redis.io/commands/cluster-nodes)
+
+    CLUSTER FORGET node-id
+
+See [Redis CLUSTER FORGET](http://redis.io/commands/cluster-forget)
 
