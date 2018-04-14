@@ -29,12 +29,13 @@
             
           </li>
           <li><a href="/clients.html">Clients</a></li>
+          <li><a href="/users.html">Users</a></li>
           <li><a href="/faq.html">FAQ</a></li>
         </ul>
         <ul class=buttons>
-          <li><a href="https://github.com/ErikDubbelboer/discnt/zipball/v1.0.4">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/ErikDubbelboer/discnt/tarball/v1.0.4">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/ErikDubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
+          <li><a href="https://github.com/erikdubbelboer/discnt/zipball/v1.0.4">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/erikdubbelboer/discnt/tarball/v1.0.4">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/erikdubbelboer/discnt">Fork On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
@@ -47,13 +48,13 @@
 <p>Discnt uses predictions to lower network uses between instances.</p>
 
 <p>Predictions are done on the local shard of a counter. Once per second the prediction is checked against the real value of the local shard. If the prediction is still within the precision of the counter nothing needs to be done.
-If it doesn’t match a new prediction is made and the local value and prediction are send to all nodes. Predictions are done over a period of <a href="https://github.com/ErikDubbelboer/discnt/blob/fe7e3ead135d747dc5f5efd59067f0af726fcfbc/discnt.conf#L342"><code>history-size</code></a> seconds.
-The default precision can be set using the <a href="https://github.com/ErikDubbelboer/discnt/blob/fe7e3ead135d747dc5f5efd59067f0af726fcfbc/discnt.conf#L339"><code>default-precision</code></a> config directive. Per counter precision can be get and set using the <a href="/api.html#precision"><code>PRECISION</code></a> command.</p>
+If it doesn’t match a new prediction is made and the local value and prediction are send to all nodes. Predictions are done over a period of <a href="https://github.com/erikdubbelboer/discnt/blob/fe7e3ead135d747dc5f5efd59067f0af726fcfbc/discnt.conf#L342"><code>history-size</code></a> seconds.
+The default precision can be set using the <a href="https://github.com/erikdubbelboer/discnt/blob/fe7e3ead135d747dc5f5efd59067f0af726fcfbc/discnt.conf#L339"><code>default-precision</code></a> config directive. Per counter precision can be get and set using the <a href="/api.html#precision"><code>PRECISION</code></a> command.</p>
 
 
       </section>
       <footer>
-        <p>This project is maintained by <a href="http://github.com/ErikDubbelboer">Erik Dubbelboer</a></p>
+        <p>This project is maintained by <a href="http://github.com/erikdubbelboer">Erik Dubbelboer</a></p>
         <p><small><a href="https://github.com/erikdubbelboer/discnt.io">Source for this site</a></small></p>
         <p><small>Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
